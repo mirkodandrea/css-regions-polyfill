@@ -7,7 +7,7 @@
 ////////////////////////////////////////
 
 !(function(window, document) { "use strict";
-	/** set this to true to throw errors on stylesheet matching errors */
+
 	//
 	// some code for console polyfilling
 	//
@@ -2254,6 +2254,9 @@ require.define('src/core/dom-query-selector-live.js');
 // TODO: comment about the 'no_auto_stylesheet_detection' flag?
 
 module.exports = (function(window, document) { "use strict";
+	/**
+	 * SET __CSS_REGIONS_POLYFILL_DEBUG__ to true to get notified on rule matching errors
+	 */
 	const __CSS_REGIONS_POLYFILL_DEBUG__ = "__CSS_REGIONS_POLYFILL_DEBUG__";
 	window[__CSS_REGIONS_POLYFILL_DEBUG__] = false;
 
