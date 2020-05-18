@@ -1,4 +1,4 @@
-/*! CSS-REGIONS-POLYFILL - v3.0.0 - 2018-03-23 - https://github.com/FremyCompany/css-regions-polyfill - Copyright (c) 2018 François REMY; MIT-Licensed !*/
+/*! CSS-REGIONS-POLYFILL - v3.0.0 - 2020-05-18 - https://github.com/FremyCompany/css-regions-polyfill - Copyright (c) 2020 François REMY; MIT-Licensed !*/
 
 !(function() { 'use strict';
     var module = { exports:{} };
@@ -7,7 +7,7 @@
 ////////////////////////////////////////
 
 !(function(window, document) { "use strict";
-
+	/** set this to true to throw errors on stylesheet matching errors */
 	//
 	// some code for console polyfilling
 	//
@@ -2254,6 +2254,9 @@ require.define('src/core/dom-query-selector-live.js');
 // TODO: comment about the 'no_auto_stylesheet_detection' flag?
 
 module.exports = (function(window, document) { "use strict";
+	const __CSS_REGIONS_POLYFILL_DEBUG__ = "__CSS_REGIONS_POLYFILL_DEBUG__";
+	window[__CSS_REGIONS_POLYFILL_DEBUG__] = false;
+
 	
 	// import dependencies
 	require('src/core/polyfill-dom-console.js');
@@ -2390,7 +2393,12 @@ module.exports = (function(window, document) { "use strict";
 									else if(element.mozMatchesSelector) isMatching=element.mozMatchesSelector(selector)
 									else if(element.webkitMatchesSelector) isMatching=element.webkitMatchesSelector(selector)
 									else { throw new Error("no element.matches?") }
-								} catch(ex) { debugger; setImmediate(function() { throw ex; }) }
+								} catch(ex) { 
+									/* set debugger if debug flag is selected */
+									if(window[__CSS_REGIONS_POLYFILL_DEBUG__]){
+										debugger; setImmediate(function() { throw ex; }) 
+									}
+								}
 								
 								// if yes, add it to the list of matched selectors
 								if(isMatching) { results.push(subrules[sr]); }
